@@ -1,5 +1,7 @@
 # kitchen-svc
 
+REST service for Heesuk's Kitchen site
+
 ## Project details (libraries and services => technologies):
 - DB: mongoDB  (NoSQL Database)
 - server: Spring boot REST JPA 
@@ -59,3 +61,4 @@ mongo database tutorial: https://www.tutorialspoint.com/mongodb/mongodb_create_d
 
 Steps to follow:
 1. create 'hello world' rest service up and running 1st following https://spring.io/guides/gs/accessing-mongodb-data-rest/
+
