@@ -4,7 +4,7 @@ REST service for Heesuk's Kitchen site
 
 ## Project details (libraries and services => technologies):
 - DB: mongoDB  (NoSQL Database)
-- server: Spring boot REST JPA 
+- server: Spring boot REST JPA (Java Persistence API) 
 - UI: Angular 2
 
 ## Hosting (all cloud-based)- the way to run(deploy) those libraries and services so that our site is available in the internet:
