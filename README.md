@@ -15,14 +15,19 @@ REST service for Heesuk's Kitchen site
   - Details: https://johnlouros.com/blog/host-your-angular-app-in-aws-s3
 
 To find out the version of Gradle (Gradle 3.5.1.): $ ./gradlew 
+    
+## Connect to the remote mongo db Altas
 
-## Mongo DB Info
-To run the mongo database: $ mongod
+### Install Mongo Shell
+Get the Mongo shell from https://downloads.mongodb.org/osx/mongodb-shell-osx-ssl-x86_64-3.4.10.tgz
+Then copy to /usr/local/bin
 
-To stop the server run:
-    `mongo`
-    `use admin`
-    `db.shutdownServer()`
+    $ sudo cp ~/Downloads/mongodb-osx-x86_64-3.4.10/bin/mongo /usr/local/bin/
+
+### Connect to the server  (replace <PASSWORD> with the admin password)
+
+    $ mongo "mongodb://kitchen-cluster0-shard-00-00-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-01-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-02-o0us2.mongodb.net:27017/kitchendb?replicaSet=kitchen-cluster0-shard-0" --ssl --authenticationDatabase admin --username heesuk-admin --password <PASSWORD>
+    
 
 ## Running the REST service
 To run the application using Gradle: $ ./gradlew bootrun
@@ -47,7 +52,18 @@ The command line URL: $ curl http://localhost:8080/people
     Thus providing the links as shown above gives the client the information they need to navigate the service.-->
 <!--Spring Data REST uses the HAL format for JSON output. 
     It is flexible and offers a convenient way to supply links adjacent to the data that is served.-->
+
+## Local Mongo DB Info
+To run the local mongo database: $ mongod
+
+To stop the server run:
+
+    $ mongo
+    $ use admin
+    $ db.shutdownServer()
+
 To start to mongo database => mongo database wants to use "/data/db" to store all data in
+
     $ sudo mkdir -p /data/db   ===> sudo is like "superuser = root"
     $ ls -al /data/db
     $ sudo chown heesukjang /data/db    ===> chown = change the owner (user)
@@ -62,3 +78,28 @@ mongo database tutorial: https://www.tutorialspoint.com/mongodb/mongodb_create_d
 Steps to follow:
 1. create 'hello world' rest service up and running 1st following https://spring.io/guides/gs/accessing-mongodb-data-rest/
 
+## Create a new database and collection / Insert Document
+    > use heesukdb
+    > db.createCollection(""heesukKitchen")
+    > show dbs
+    > db.heesukKitchen.insert({    => create a new doc(recipe) in heesukKitchen collection
+  	    title: 'California Rolls', 
+  	    koreanTitle: '캘리포니아 롤',
+  	    imagePath: '/images/california-roll.jpg',
+  	    category: 'Japanese - Sushi', 
+  	    totalTime: '1 hr 15 min', 
+  	    prepTime: '50 min', 
+  	    cookTime: '25 min', 
+  	    yield: '6 serviings', 
+  	    level: 'Advanced', 
+  	    ingredients: ['3 1/3 cups rice', '5 1/3 tablespoons vinegar', '5 tablespoons sugar', '3 tablespoons salt', '10 sheets swaweed, three-quarterd', '1/2 pound imitation crab, cut into long, thin pieces','1/3 cup mayonnaise', '1 cucumber, seeded, and julienne', '1 avocado, peeled, seeded, and cut into long, thin pieces', '6 tablespoons flying fish roe', '1 tablespoon wasabi'],
+  	    directions: ['Make Rice', 'Prepare Vegetables and Meat', 'Make a Roll']
+    })
+
+## Local Mongo:
+database name: heesukdb
+collection name: heesukKitchen
+
+## Remote Mongo Atlas:
+database name: kitchendb
+collection name: heesukKitchen
