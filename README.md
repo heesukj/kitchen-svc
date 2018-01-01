@@ -113,3 +113,24 @@ collection name: recipe
     2) URL=> localhost:8080/recipes  ==> displays all the inserted docs (recipes)
     3) push all the changes to github:
         $ git status -> git add -u -> git commit -m "connect to remote mongo" -> git push origin master
+        
+        
+## Server Deployment
+
+REST service is deployed to AWS Elastic Beanstalk (https://aws.amazon.com)
+
+1. create new application following instructions (except MySQL part) from https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/
+2. Under configuration ->  Software Configuration added 2 properties
+    + **SERVER_PORT** => 5000
+        + sets spring boot to use 5000 instead of the default 8080
+    + **SPRING_DATA_MONGODB_URI** =>  mongodb://<USERNAME>:<PASSWORD>@kitchen-cluster0-shard-00-00-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-01-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-02-o0us2.mongodb.net:27017/kitchendb?ssl=true&replicaSet=kitchen-cluster0-shard-0&authSource=admin
+        + sets the spring.data.mongodb.uri so that we can connect to the mongo db 
+
+## Deploy a new version of the REST service
+1. After making code changes, test, create merge request, push to master
+2. Update the version in build.gradle, add, commit, push to master
+3. Run ./gradlew clean bootRepackage
+4. Go to AWS Elasic Beanstalk -> kitchen-svc -> kitchen-svc-prod 
+5. On the Dashboard page, click button: Update and Deploy
+6. Choose file: select the fat jar build/libs/kitchen-svc.*.jar
+7. Click Deploy
