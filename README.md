@@ -79,10 +79,10 @@ Steps to follow:
 1. create 'hello world' rest service up and running 1st following https://spring.io/guides/gs/accessing-mongodb-data-rest/
 
 ## Create a new database and collection / Insert Document
-    > use heesukdb
-    > db.createCollection(""heesukKitchen")
+    > use kitchendb   => remote mongo db
+    > db.createCollection(""recipe")
     > show dbs
-    > db.heesukKitchen.insert({    => create a new doc(recipe) in heesukKitchen collection
+    > db.recipe.insert({    => create a new doc(recipe) in recipe collection (collection name has to be "sigular", while REST endpoint has to be "plural" like recipes)
   	    title: 'California Rolls', 
   	    koreanTitle: '캘리포니아 롤',
   	    imagePath: '/images/california-roll.jpg',
@@ -102,4 +102,14 @@ collection name: heesukKitchen
 
 ## Remote Mongo Atlas:
 database name: kitchendb
-collection name: heesukKitchen
+collection name: recipe
+
+## Connect to Remote Mongo Atlas:
+    1) /resources/application.properties
+            spring.data.mongodb.uri=mongodb://kitchen-svc-ro:kitch-rest-read-only@kitchen-cluster0-shard-00-00-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-01-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-02-o0us2.mongodb.net:27017/kitchendb?ssl=true&replicaSet=kitchen-cluster0-shard-0&authSource=admin
+    
+        Read only user Atlas => username: kitchen-svc-ro, password: kitch-rest-read-only,  change "test?" to "kitchendb" our remote mongo db name
+    
+    2) URL=> localhost:8080/recipes  ==> displays all the inserted docs (recipes)
+    3) push all the changes to github:
+        $ git status -> git add -u -> git commit -m "connect to remote mongo" -> git push origin master
