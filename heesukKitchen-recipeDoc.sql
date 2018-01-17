@@ -1,4 +1,4 @@
-db.heesukKitchen.insert({
+db.recipe.insert({
 	title: 'California Rolls', 
 	koreanTitle: '캘리포니아 롤',
 	imagePath: '/images/california-roll.jpg',
@@ -12,7 +12,7 @@ db.heesukKitchen.insert({
 	directions: ['Make Rice', 'Prepare Vegetables and Meat', 'Make a Roll']
 })
 
-db.heesukKitchen.insert({
+db.recipe.insert({
 	title: 'Galbee - Korean Beef Short Ribs BBQ', 
 	koreanTitle: '갈비',
 	imagePath: '/images/galbee.jpg',
@@ -26,7 +26,7 @@ db.heesukKitchen.insert({
 	directions: ['Make Marinade Sauce', 'Prepare Meat', 'Marinade the Meat', 'Grill']
 })
 
-db.heesukKitchen.insert({
+db.recipe.insert({
 	title: 'Deokbokkee - Spicy Rick Cake', 
 	koreanTitle: '떡볶이',
 	imagePath: '/images/teokbokkee.jpg',
@@ -45,3 +45,99 @@ db.heesukKitchen.insert({
 -- To copy all the files in heesuk-kitchen to kitchen-svc folder:
 -- 		in heesuk-kitchen directory: $cp -rp * ../kitchen-svc/
 -- 		in heesukjang directory: $cp -rp heesuk-kitchen/*  kitchen-svc/
+
+db.recipe.update(
+   { "_id" : ObjectId("5a46932e99269aadec1d11f1") },
+   {
+    $set: { title: "Spicy Rice Cake" },
+    $set: { caloriesPerServing: "265" },
+    $set: { koreanTitlePron: "DeokBokGi" }
+   }
+)
+-- update values of caloriesPerServing and add koreanTitlePron attributes
+db.recipe.update(
+   { "_id" : ObjectId("5a46934199269aadec1d11f2") },
+   {
+    $set: { title: "Korean Beef Short Ribs BBQ" },
+    $set: { ref: "Korean Beef Short Ribs BBQ" },
+    $set: { caloriesPerServing: "479" },
+    $set: { koreanTitlePron: "Galbee" }
+   }
+)
+db.recipe.update(
+   { "_id" : ObjectId("5a46983699269aadec1d11f3") },
+   {
+    $set: { caloriesPerServing: "395" },
+    $set: { koreanTitlePron: "" }
+   }
+)
+-- update categories of recipes
+db.recipe.update(
+   { "_id" : ObjectId("5a46932e99269aadec1d11f1") },
+   {
+    $set: { category: "Snack" }
+
+   }
+)
+db.recipe.update(
+   { "_id" : ObjectId("5a46934199269aadec1d11f2") },
+   {
+    $set: { category: "BBQ" }
+   }
+)
+db.recipe.update(
+   { "_id" : ObjectId("5a46983699269aadec1d11f3") },
+   {
+    $set: { category: "Rice" }
+   }
+)
+-- update descriptions of recipes
+db.recipe.update(
+   { "_id" : ObjectId("5a46932e99269aadec1d11f1") },
+   {
+    $set: { description: ["Spice rice cake (떡볶이: DeokBokGi) is a popular Korean street food made from soft rice cake, fish cake, and sweet chili sauce (gochujang).", "It is commonly purchased from street vendors or pojangmacha."] }
+
+   }
+)
+db.recipe.update(
+   { "_id" : ObjectId("5a46934199269aadec1d11f2") },
+   {
+    $set: { description: ["Galbee (갈비) is a type of gui (grilled dish) in Korean cuisine.", "Galbee is the Korean word for rib, and the dish is usually made with beef short ribs.", "When pork spareribs or another meat is used instead, the dish is named accordingly. Galbi is served raw, then cooked on tabletop grills usually by the diners themselves.The dish may be marinated in a sweet and savory sauce usually containing soy sauce, garlic, and sugar. Both non-marinated and marinated galbee are often featured in Korean barbecue."] }
+   }
+)
+
+db.recipe.update(
+   { "_id" : ObjectId("5a46983699269aadec1d11f3") },
+   {
+    $set: { description: ["A California roll or California maki is a makizushi sushi roll, usually made inside-out, containing cucumber, crab meat or imitation crab, and avocado. Sometimes crab salad is substituted for the crab stick, and often the outer layer of rice in an inside-out roll (uramaki) is sprinkled with toasted sesame seeds, tobiko or masago (capelin roe)."] }
+   }
+)
+
+-- update descriptions of recipes
+db.recipe.update(
+   { "_id" : ObjectId("5a46932e99269aadec1d11f1") },
+   {
+    $set: { imagePath: "/assets/images/spicy-rice-cake.png" }
+
+   }
+)
+db.recipe.update(
+   { "_id" : ObjectId("5a46934199269aadec1d11f2") },
+   {
+    $set: { imagePath: "/assets/images/korean-beef-bbq.png" }
+   }
+)
+db.recipe.update(
+   { "_id" : ObjectId("5a46983699269aadec1d11f3") },
+   {
+    $set: { imagePath: "/assets/images/california-roll.png" }
+   }
+)
+-- connect to the remote Atlas server:
+Heesuks-MacBook-Pro:kitchen-svc heesukjang$ mongo "mongodb://kitchen-cluster0-shard-00-00-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-01-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-02-o0us2.mongodb.net:27017/kitchendb?replicaSet=kitchen-cluster0-shard-0" --ssl --authenticationDatabase admin --username heesuk-admin --password <admin password>  => to bring mongo db prompt
+> show databases;
+> use kitchendb
+> db.recipe.find().pretty()
+> db.recipe.insert({})
+> db.recipe.update({})
+

@@ -1,4 +1,4 @@
-package com.heesuk.kitchen.hello;
+package com.heesuk.kitchen.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;

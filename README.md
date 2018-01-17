@@ -24,7 +24,7 @@ Then copy to /usr/local/bin
 
     $ sudo cp ~/Downloads/mongodb-osx-x86_64-3.4.10/bin/mongo /usr/local/bin/
 
-### Connect to the server  (replace <PASSWORD> with the admin password)
+### Connect to the server  (replace <PASSWORD> with the admin password) => connect remote db (use "admin password" => saved in LasPass, not read-only password)
 
     $ mongo "mongodb://kitchen-cluster0-shard-00-00-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-01-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-02-o0us2.mongodb.net:27017/kitchendb?replicaSet=kitchen-cluster0-shard-0" --ssl --authenticationDatabase admin --username heesuk-admin --password <PASSWORD>
     
@@ -129,8 +129,10 @@ REST service is deployed to AWS Elastic Beanstalk (https://aws.amazon.com)
 ## Deploy a new version of the REST service
 1. After making code changes, test, create merge request, push to master
 2. Update the version in build.gradle, add, commit, push to master
-3. Run ./gradlew clean bootRepackage
-4. Go to AWS Elasic Beanstalk -> kitchen-svc -> kitchen-svc-prod 
+3. Run **./gradlew clean bootRepackage**
+4. Log in https://aws.amazon.com/console/ -> Go to AWS **Elasic Beanstalk** -> kitchen-svc -> kitchen-svc-prod 
 5. On the Dashboard page, click button: Update and Deploy
-6. Choose file: select the fat jar build/libs/kitchen-svc.*.jar
+6. Choose file: select the 'fat jar' **build/libs/kitchen-svc.*.jar**
 7. Click Deploy
+8. After deploy completes, on the dashboard page click URL with '/recipes' to verify it is working
+

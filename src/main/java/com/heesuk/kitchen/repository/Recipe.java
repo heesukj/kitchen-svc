@@ -1,4 +1,4 @@
-package com.heesuk.kitchen.hello;
+package com.heesuk.kitchen.repository;
 
 import org.springframework.data.annotation.Id;
 
@@ -13,20 +13,20 @@ public class Recipe {
 
     private String title;
     private String koreanTitle;
+    private String koreanTitlePron;
     private String imagePath;
+    private List<String> description;
     private String category;
     private String totalTime;
     private String prepTime;
     private String cookTime;
     private String yield;
     private String level;
+    private String caloriesPerServing;
     private List<String> ingredients;
     private List<String> directions;
 
     // getters and setters
-
-
-
     public String getId() {
         return id;
     }
@@ -43,12 +43,28 @@ public class Recipe {
         this.title = title;
     }
 
+    public String getKoreanTitlePron() {
+        return koreanTitlePron;
+    }
+
+    public void setKoreanTitlePron(String koreanTitlePron) {
+        this.koreanTitlePron = koreanTitlePron;
+    }
+
     public String getImagePath() {
         return imagePath;
     }
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public List<String> getDescription() {
+        return description;
+    }
+
+    public void setDescription(List<String> description) {
+        this.description = description;
     }
 
     public String getCategory() {
@@ -75,6 +91,7 @@ public class Recipe {
         this.prepTime = prepTime;
     }
 
+
     public String getCookTime() {
         return cookTime;
     }
@@ -97,6 +114,14 @@ public class Recipe {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getCaloriesPerServing() {
+        return caloriesPerServing;
+    }
+
+    public void setCaloriesPerServing(String caloriesPerServing) {
+        this.caloriesPerServing = caloriesPerServing;
     }
 
     public List<String> getIngredients() {
