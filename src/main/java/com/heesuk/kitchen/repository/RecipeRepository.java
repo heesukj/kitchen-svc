@@ -12,6 +12,12 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "recipes", path = "recipes")
 public interface RecipeRepository extends MongoRepository<Recipe, String> {
+
     List<Recipe> findByTitle(@Param("title") String title);
+
+    List<Recipe> findByTitleIgnoreCaseContaining(@Param("title") String title);
+
+    List<Recipe> findByCategoryIgnoreCase(@Param("category") String category);
+
 }
 

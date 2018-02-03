@@ -24,7 +24,7 @@ Then copy to /usr/local/bin
 
     $ sudo cp ~/Downloads/mongodb-osx-x86_64-3.4.10/bin/mongo /usr/local/bin/
 
-### Connect to the server  (replace <PASSWORD> with the admin password) => connect remote db (use "admin password" => saved in LasPass, not read-only password)
+### Connect to the server  (replace <PASSWORD> with the admin password) => connect remote db (use "admin password" => saved in LasPass, not read-only password) => remote mongo shell
 
     $ mongo "mongodb://kitchen-cluster0-shard-00-00-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-01-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-02-o0us2.mongodb.net:27017/kitchendb?replicaSet=kitchen-cluster0-shard-0" --ssl --authenticationDatabase admin --username heesuk-admin --password <PASSWORD>
     
@@ -36,7 +36,7 @@ The command line URL: $ curl http://localhost:8080/people
     curl -i -X POST -H "Content-Type:application/json" -d "{  \"firstName\" : \"Frodo\",  \"lastName\" : \"Baggins\" }" http://localhost:8080/people
     curl -X PUT -H "Content-Type:application/json" -d "{ \"firstName\": \"Bilbo\", \"lastName\": \"Baggins\" }" http://localhost:8080/people/53149b8e3004990b1af9f229
     curl -X PATCH -H "Content-Type:application/json" -d "{ \"firstName\": \"Bilbo Jr.\" }" http://localhost:8080/people/53149b8e3004990b1af9f229
-    curl -X DELETE http://localhost:8080/people/53149b8e3004990b1af9f229
+    curl -X DELETE http://localhost:8080/peoplme/53149b8e3004990b1af9f229
 <!-- -i ensures you can see the response message including the headers. The URI of the newly created Person is shown    
      -X POST signals this a POST used to create a new entry    
      -H "Content-Type:application/json" sets the content type so the application knows the payload contains a JSON object    
@@ -113,7 +113,7 @@ collection name: recipe
     2) URL=> localhost:8080/recipes  ==> displays all the inserted docs (recipes)
     3) push all the changes to github:
         $ git status -> git add -u -> git commit -m "connect to remote mongo" -> git push origin master
-        
+         
         
 ## Server Deployment
 

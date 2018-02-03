@@ -15,8 +15,13 @@ public class Recipe {
     private String koreanTitle;
     private String koreanTitlePron;
     private String imagePath;
+//    set 'description' as a list so that we can set them as a list of paragraphs
     private List<String> description;
     private String category;
+    private List<String> meal;
+    private Integer year;
+    private Integer month;
+    private Integer day;
     private String totalTime;
     private String prepTime;
     private String cookTime;
@@ -73,6 +78,38 @@ public class Recipe {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public List<String> getMeal() {
+        return meal;
+    }
+
+    public void setMeal(List<String> meal) {
+        this.meal = meal;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
+
+    public Integer getDay() {
+        return day;
+    }
+
+    public void setDay(Integer day) {
+        this.day = day;
     }
 
     public String getTotalTime() {
