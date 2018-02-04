@@ -17,7 +17,12 @@ public interface RecipeRepository extends MongoRepository<Recipe, String> {
 
     List<Recipe> findByTitleIgnoreCaseContaining(@Param("title") String title);
 
+    List<Recipe> findBykoreanTitleIgnoreCase(@Param("koreanTitle") String koreanTitle);
+
+    List<Recipe> findBykoreanTitlePronIgnoreCase(@Param("koreanTitlePron") String koreanTitlePron);
+
     List<Recipe> findByCategoryIgnoreCase(@Param("category") String category);
+
 
 }
 

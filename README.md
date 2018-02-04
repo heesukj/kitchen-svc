@@ -80,7 +80,7 @@ Steps to follow:
 
 ## Create a new database and collection / Insert Document
     > use kitchendb   => remote mongo db
-    > db.createCollection(""recipe")
+    > db.createCollection(""recipe")  => name of collection = 'recipe'
     > show dbs
     > db.recipe.insert({    => create a new doc(recipe) in recipe collection (collection name has to be "sigular", while REST endpoint has to be "plural" like recipes)
   	    title: 'California Rolls', 
@@ -95,6 +95,12 @@ Steps to follow:
   	    ingredients: ['3 1/3 cups rice', '5 1/3 tablespoons vinegar', '5 tablespoons sugar', '3 tablespoons salt', '10 sheets swaweed, three-quarterd', '1/2 pound imitation crab, cut into long, thin pieces','1/3 cup mayonnaise', '1 cucumber, seeded, and julienne', '1 avocado, peeled, seeded, and cut into long, thin pieces', '6 tablespoons flying fish roe', '1 tablespoon wasabi'],
   	    directions: ['Make Rice', 'Prepare Vegetables and Meat', 'Make a Roll']
     })
+    
+    ----------------------
+    > show dbs
+    > use kitchendb   => choose a databse 'kitchendb' to use
+    > show collections
+    > db.recipe.find().pretty()  => choose a collection 'recipe' to display the documents (= each recipe) in this collection
 
 ## Local Mongo:
 database name: heesukdb
