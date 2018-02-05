@@ -134,11 +134,11 @@ REST service is deployed to AWS Elastic Beanstalk (https://aws.amazon.com)
 
 ## Deploy a new version of the REST service
 1. After making code changes, test, create merge request, push to master
-2. Update the version in build.gradle, add, commit, push to master
+2. Update the version in file "build.gradle", git add build.gradle, git commit, git push to master
 3. Run **./gradlew clean bootRepackage**
-4. Log in https://aws.amazon.com/console/ -> Go to AWS **Elasic Beanstalk** -> kitchen-svc -> kitchen-svc-prod 
+4. Log in "https://aws.amazon.com/console/" -> Go to AWS **Elasic Beanstalk** -> kitchen-svc -> kitchen-svc-prod 
 5. On the Dashboard page, click button: Update and Deploy
 6. Choose file: select the 'fat jar' **build/libs/kitchen-svc.*.jar**
-7. Click Deploy
+7. Click "Deploy"
 8. After deploy completes, on the dashboard page click URL with '/recipes' to verify it is working
 
