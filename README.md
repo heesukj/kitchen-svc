@@ -132,13 +132,14 @@ REST service is deployed to AWS Elastic Beanstalk (https://aws.amazon.com)
     + **SPRING_DATA_MONGODB_URI** =>  mongodb://<USERNAME>:<PASSWORD>@kitchen-cluster0-shard-00-00-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-01-o0us2.mongodb.net:27017,kitchen-cluster0-shard-00-02-o0us2.mongodb.net:27017/kitchendb?ssl=true&replicaSet=kitchen-cluster0-shard-0&authSource=admin
         + sets the spring.data.mongodb.uri so that we can connect to the mongo db 
 
-## Deploy a new version of the REST service
+## Deploy a new version of the REST service (whenever you make changes in REST (kitchen-svc), do the followings)
 1. After making code changes, test, create merge request, push to master
-2. Update the version in file "build.gradle", git add build.gradle, git commit, git push to master
-3. Run **./gradlew clean bootRepackage**
-4. Log in "https://aws.amazon.com/console/" -> Go to AWS **Elasic Beanstalk** -> kitchen-svc -> kitchen-svc-prod 
+2. Update the version (version = '0.0.3') in file "build.gradle", git add build.gradle, git commit, git push to master
+3. Run **./gradlew bootrun**
+3. Then, Run **./gradlew clean bootRepackage**
+4. Log in "https://aws.amazon.com/console/" -> Sign in -> Go to AWS **Elasic Beanstalk** -> kitchen-svc -> kitchen-svc-prod 
 5. On the Dashboard page, click button: Update and Deploy
-6. Choose file: select the 'fat jar' **build/libs/kitchen-svc.*.jar**
+6. Choose file: select the 'fat jar' **dev/kitchen-svc/build/libs/kitchen-svc.*.jar** => java archive
 7. Click "Deploy"
 8. After deploy completes, on the dashboard page click URL with '/recipes' to verify it is working
 
